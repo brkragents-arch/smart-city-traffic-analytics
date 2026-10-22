@@ -1,0 +1,12 @@
+{
+  "name": "smart-city-traffic-analytics-agent",
+  "version": "1.0.0",
+  "description": "Real-time vehicle detection, counting, speed estimation, and stream-based DBSCAN/DenStream clustering agent for smart city congestion hotspot discovery",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
