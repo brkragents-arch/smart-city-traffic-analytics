@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCity Pulse AI — Unified Real-Time Traffic, Speed, Emission Rate & Multi-Density Hotspot Stream Framework</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- TensorFlow.js & COCO-SSD for Custom Uploaded MP4/WebM Traffic Video Inference -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js" defer></script>
+</head>
+<body>
+  <!-- Top Navigation & Agent Telemetry Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">
+        <span class="pulse-dot"></span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <h1>SmartCity Pulse <span class="badge-accent">UNIFIED TRAFFIC & EMISSION STREAM AI</span></h1>
+        <p class="subtitle">Vehicle Detection • Speed Homography • COPERT-VSP Empirical Emission Modelling • Autonomous Multi-Density Pollution Hotspot Clustering</p>
+      </div>
+    </div>
+
+    <div class="topbar-controls">
+      <div class="agent-connection" id="agentConnectionBadge">
+        <span class="status-indicator online"></span>
+        <span id="agentStatusText">Unified Stream Agent Connected (SSE)</span>
+      </div>
+
+      <label class="auto-push-toggle" title="Automatically push a new Agent Traffic & Emission Analysis Report every 25 seconds">
+        <input type="checkbox" id="autoPushToggle" checked />
+        <span>Auto-Push Agent Reports (25s)</span>
+      </label>
+
+      <button class="btn btn-secondary" id="openMapWindowBtn" title="Open interactive GIS Map of all Smart City Cameras & Pollution Hotspots in a separate window">
+        🗺️ Open Cameras Map Window
+      </button>
+
+      <button class="btn btn-primary" id="pushReportNowBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+        Push Analysis Report Now
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="workspace">
+    <!-- Left / Center Column: Real-Time Video Feed + HUD + Stream Controls -->
+    <section class="video-column">
+      <!-- Feed Selector & Scenario Toolbar -->
+      <div class="panel toolbar-panel">
+        <div class="toolbar-group">
+          <label for="cameraSelect" class="control-label">Video Stream Source</label>
+          <select id="cameraSelect" class="select-input">
+            <option value="CAM-01" selected>CAM-01: I-70 AT US 29 (105 km/h LIVE)</option>
+            <option value="CAM-02">CAM-02: I-70 E at US 29 (105 km/h LIVE)</option>
+            <option value="CAM-06">CAM-06: I-70 at Ex 80 MD 32 (110 km/h LIVE)</option>
+            <option value="CAM-03">CAM-03: US 29 AT MD 100 (100 km/h LIVE)</option>
+            <option value="CAM-04">CAM-04: US 29 N AT MD 108 (90 km/h LIVE)</option>
+            <option value="CAM-05">CAM-05: US 29 S AT MD 108 (90 km/h LIVE)</option>
+          </select>
+        </div>
+
+        <div class="toolbar-group">
+          <label class="btn btn-secondary file-upload-btn" title="Upload an MP4/WebM traffic video for live TensorFlow.js COCO-SSD + COPERT Emission inference">
+            <input type="file" id="videoUploadInput" accept="video/mp4,video/webm,video/ogg" hidden />
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span id="uploadBtnLabel">Upload Traffic Video (.mp4)</span>
+          </label>
+          <button class="btn btn-outline" id="resetSimBtn" style="display:none;">Return to Smart Corridor Feed</button>
+        </div>
+
+        <div class="toolbar-group toolbar-actions">
+          <button class="btn btn-warning" id="triggerShockwaveBtn" title="Inject a lane bottleneck / diesel platoon shockwave to watch Multi-Density HDBSCAN/DenStream discover a live congestion & pollution hotspot">
+            ⚡ Trigger Congestion & Pollution Shockwave
+          </button>
+          <button class="btn btn-outline" id="clearShockwaveBtn">
+            ✓ Clear Incident
+          </button>
+          <button class="btn btn-outline" id="pauseResumeBtn">
+            ⏸ Pause
+          </button>
+        </div>
+      </div>
+
+      <!-- Video Inference Viewport Canvas -->
+      <div class="panel viewport-panel">
+        <div class="viewport-header">
+          <div class="cam-meta">
+            <span class="live-pill">● LIVE STREAM FRAMEWORK</span>
+            <span id="activeCamTitle" class="cam-title">CAM-01: I-70 AT US 29</span>
+            <span id="activeCamCoords" class="cam-coords">39.2981° N, 76.8836° W</span>
+          </div>
+          <div class="inference-stats">
+            <span class="stat-chip">Engine: <strong id="detectorName">YOLOv8 + COPERT-VSP + Multi-Density HDBSCAN</strong></span>
+            <span class="stat-chip">FPS: <strong id="fpsReadout">60</strong></span>
+            <span class="stat-chip">Active Tracks: <strong id="activeTracksReadout">0</strong></span>
+          </div>
+        </div>
+
+        <div class="canvas-wrapper">
+          <canvas id="trafficCanvas" width="920" height="500"></canvas>
+          <video id="uploadedVideo" playsinline muted loop style="display:none;"></video>
+        </div>
+
+        <!-- Overlay Layer & Clustering Hyperparameter Controls -->
+        <div class="hud-controls-bar">
+          <div class="layer-toggles">
+            <span class="toggle-group-label">HUD Layers:</span>
+            <label class="chip-toggle"><input type="checkbox" id="toggleBBox" checked /> <span>BBox, Speed & CO2 Rate</span></label>
+            <label class="chip-toggle"><input type="checkbox" id="toggleVehicleFactors" checked /> <span>Fuel / Weight / Age / CC Tags</span></label>
+            <label class="chip-toggle"><input type="checkbox" id="toggleTrails" checked /> <span>Motion Trails</span></label>
+            <label class="chip-toggle"><input type="checkbox" id="toggleTripwire" checked /> <span>Counting Tripwire</span></label>
+            <label class="chip-toggle"><input type="checkbox" id="toggleClusters" checked /> <span>Multi-Density Pollution Hotspots</span></label>
+            <label class="chip-toggle"><input type="checkbox" id="toggleHeatmap" checked /> <span> Dispersion Plume Field</span></label>
+          </div>
+
+          <div class="slider-controls">
+            <div class="slider-item">
+              <label for="epsSlider">Spatial Scale (ε): <strong id="epsVal">72px</strong></label>
+              <input type="range" id="epsSlider" min="45" max="120" value="72" />
+            </div>
+            <div class="slider-item">
+              <label for="minPtsSlider">MinPts (No Fixed k): <strong id="minPtsVal">3</strong></label>
+              <input type="range" id="minPtsSlider" min="2" max="6" value="3" />
+            </div>
+            <div class="slider-item">
+              <label for="speedThreshSlider">Congestion Speed ≤ <strong id="speedThreshVal">38 km/h</strong></label>
+              <input type="range" id="speedThreshSlider" min="20" max="55" value="38" />
+            </div>
+            <div class="slider-item">
+              <label for="spawnRateSlider">Traffic & Freight Load: <strong id="spawnRateVal">High</strong></label>
+              <input type="range" id="spawnRateSlider" min="1" max="3" step="1" value="2" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Charts & Active Multi-Density Pollution Hotspots Table -->
+      <div class="bottom-grid">
+        <div class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Live Speed, CO₂ Rate (g/s) & NOx Flux Stream</h3>
+            <span class="sub-label">60-Second Unified Sliding Window Telemetry</span>
+          </div>
+          <canvas id="telemetryChartCanvas" width="440" height="180"></canvas>
+        </div>
+
+        <div class="panel clusters-live-panel">
+          <div class="panel-header">
+            <h3>Autonomous Multi-Density Congestion & Pollution Hotspots</h3>
+            <span class="badge-count" id="liveClusterBadge">0 Active</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Hotspot ID</th>
+                  <th>Density Regime & Zone</th>
+                  <th>Veh / Speed</th>
+                  <th>CO₂ / NOx / PM2.5</th>
+                  <th>Local AQI</th>
+                </tr>
+              </thead>
+              <tbody id="liveClustersTableBody">
+                <tr>
+                  <td colspan="5" class="empty-cell">Scanning stream for multi-density congestion & pollution hotspots...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Live Traffic + Emission KPIs + Empirical Factors + Pushed Reports -->
+    <aside class="analytics-column">
+      <!-- Real-Time KPI Cards (6 Cards: Traffic + Live Emission Rate Monitoring) -->
+      <div class="kpi-grid kpi-grid-6">
+        <div class="kpi-card">
+          <span class="kpi-label">Line Crossings</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value" id="kpiTotalCount">0</span>
+            <span class="kpi-unit">veh</span>
+          </div>
+          <div class="kpi-sub" id="kpiDirectionalSplit">▲ NB: 0  |  ▼ SB: 0</div>
+        </div>
+
+        <div class="kpi-card">
+          <span class="kpi-label">Mean / P85 Speed</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value" id="kpiMeanSpeed">0.0</span>
+            <span class="kpi-unit">km/h</span>
+          </div>
+          <div class="kpi-sub" id="kpiP85Speed">P85: 0.0 km/h • Viol: 0</div>
+        </div>
+
+        <div class="kpi-card">
+          <span class="kpi-label">Corridor Level of Service</span>
+          <div class="kpi-value-row">
+            <span class="los-badge los-b" id="kpiLosBadge">LoS B</span>
+            <span class="kpi-unit" id="kpiFlowRate">0 veh/m</span>
+          </div>
+          <div class="kpi-sub" id="kpiLosDesc">Reasonably Free Flow</div>
+        </div>
+
+        <div class="kpi-card">
+          <span class="kpi-label">Live CO₂ Emission Rate</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value" style="color:#38bdf8" id="kpiCo2Rate">0.0</span>
+            <span class="kpi-unit">g/s</span>
+          </div>
+          <div class="kpi-sub" id="kpiCo2Hourly">0.0 kg/hr corridor flux</div>
+        </div>
+
+        <div class="kpi-card">
+          <span class="kpi-label">NOx & PM₂.₅ Tailpipe Flux</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value" style="color:#fbbf24" id="kpiNoxRate">0.0</span>
+            <span class="kpi-unit">mg/s NOx</span>
+          </div>
+          <div class="kpi-sub" id="kpiPm25Rate">PM2.5: 0.00 mg/s | CO: 0 mg/s</div>
+        </div>
+
+        <div class="kpi-card">
+          <span class="kpi-label">Pollution Hotspots & AQI</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value accent-hot" id="kpiHotspotCount">0</span>
+            <span class="kpi-unit" id="kpiAqiBadge">AQI 55</span>
+          </div>
+          <div class="kpi-sub" id="kpiClusterVehicles">0 veh in multi-density plumes</div>
+        </div>
+      </div>
+
+      <!-- Empirical Emission Factor & Vehicle Classification Breakdown -->
+      <div class="panel class-panel">
+        <div class="panel-header">
+          <h3>Empirical Emission Factors (Type • Weight • Fuel • Age • CC)</h3>
+          <span id="totalClassCountLabel" class="sub-label">COPERT-VSP Live Stream</span>
+        </div>
+        <div class="class-bars" id="classBarsContainer"></div>
+      </div>
+
+      <!-- Pushed Agent Data Analysis Reports Panel -->
+      <div class="panel reports-panel">
+        <div class="panel-header">
+          <div>
+            <h3>Pushed Traffic & Emission Analysis Reports</h3>
+            <p class="sub-label">Autonomous Multi-Density Congestion & Pollution Reports pushed via Agent API</p>
+          </div>
+          <div class="report-filter-row">
+            <select id="reportFilterSelect" class="select-input select-sm">
+              <option value="ALL">All Cameras</option>
+              <option value="CAM-01">CAM-01 (I-70 AT US 29)</option>
+              <option value="CAM-02">CAM-02 (I-70 E at US 29)</option>
+              <option value="CAM-06">CAM-06 (I-70 at Ex 80 MD 32)</option>
+              <option value="CAM-03">CAM-03 (US 29 AT MD 100)</option>
+              <option value="CAM-04">CAM-04 (US 29 N AT MD 108)</option>
+              <option value="CAM-05">CAM-05 (US 29 S AT MD 108)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Pushed Reports Feed List -->
+        <div class="reports-feed" id="reportsFeedContainer"></div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Detailed Report Inspector Modal -->
+  <div class="modal-backdrop" id="reportModalBackdrop" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="report-id-pill" id="modalReportId">RPT-20261022-001</span>
+          <h2 id="modalReportTitle">Data Analysis Report</h2>
+          <p class="sub-label" id="modalReportMeta"></p>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-outline" id="exportReportJsonBtn">⬇ Export JSON</button>
+          <button class="btn btn-outline" id="exportReportCsvBtn">⬇ Export CSV</button>
+          <button class="btn btn-secondary" id="printReportBtn">🖨 Print / PDF</button>
+          <button class="btn btn-close" id="closeModalBtn">✕</button>
+        </div>
+      </div>
+      <div class="modal-body" id="modalReportBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

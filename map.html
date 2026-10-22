@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCity Pulse AI — Live GIS Camera Network & Congestion Hotspot Map</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Leaflet GIS CSS & JS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <style>
+    body.map-window-body {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #060b16;
+    }
+
+    .map-workspace {
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      flex: 1;
+      min-height: 0;
+      position: relative;
+    }
+
+    @media (max-width: 980px) {
+      .map-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .map-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #070d19;
+    }
+
+    #cityMap {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: #08101f;
+    }
+
+    /* Floating Map Legend & Layer Toolbar */
+    .map-overlay-top {
+      position: absolute;
+      top: 14px;
+      left: 56px;
+      z-index: 500;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      pointer-events: auto;
+    }
+
+    .map-glass-pill {
+      background: rgba(12, 20, 38, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid #293d66;
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.76rem;
+      color: var(--text-main);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .map-legend-bottom {
+      position: absolute;
+      bottom: 18px;
+      left: 16px;
+      z-index: 500;
+      background: rgba(12, 20, 38, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid #293d66;
+      border-radius: 9px;
+      padding: 0.65rem 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.73rem;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      color: #cbd5e1;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Custom Leaflet Camera Marker Pin */
+    .cam-map-pin {
+      background: rgba(11, 19, 36, 0.95);
+      border: 2px solid #00e5ff;
+      border-radius: 8px;
+      padding: 4px 8px;
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: transform 0.15s ease;
+    }
+
+    .cam-map-pin:hover {
+      transform: scale(1.07);
+      z-index: 999 !important;
+    }
+
+    .cam-map-pin.active-sync {
+      border-color: #00e5ff;
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.65);
+    }
+
+    .cam-map-pin.pin-critical {
+      border-color: #ef4444;
+    }
+
+    .cam-map-pin.pin-warn {
+      border-color: #f59e0b;
+    }
+
+    .cam-pin-header {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cam-pin-sub {
+      font-size: 9.5px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    /* Right Sidebar inside Map Window */
+    .map-sidebar {
+      background: var(--bg-panel);
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0.85rem;
+      overflow-y: auto;
+    }
+
+    .mini-feed-box {
+      background: #060a14;
+      border: 1px solid #2b3f66;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #miniPreviewCanvas {
+      width: 100%;
+      height: 175px;
+      display: block;
+    }
+
+    .cam-directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .cam-dir-card {
+      background: var(--bg-panel-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+
+    .cam-dir-card:hover,
+    .cam-dir-card.selected {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.06);
+    }
+
+    .cam-dir-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cam-dir-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .cam-dir-coords {
+      font-size: 0.69rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .cam-dir-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.35rem;
+      background: rgba(8, 13, 26, 0.6);
+      padding: 0.35rem 0.5rem;
+      border-radius: 5px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+    }
+
+    /* Dark Leaflet Popup Override */
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+      background: #10182b !important;
+      color: #f0f4fc !important;
+      border: 1px solid #2e4573;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65) !important;
+    }
+  </style>
+</head>
+<body class="map-window-body">
+  <!-- Header Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">
+        <span class="pulse-dot"></span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+          <line x1="8" y1="2" x2="8" y2="18"/>
+          <line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+      </div>
+      <div>
+        <h1>SmartCity GIS Camera Network & Hotspot Map <span class="badge-accent">LIVE SYNC WINDOW</span></h1>
+        <p class="subtitle">Real-Time Geo-Spatial Camera Feeds • Corridor Level of Service (LoS) • DBSCAN Congestion Hotspot Radar</p>
+      </div>
+    </div>
+
+    <div class="topbar-controls">
+      <div class="agent-connection">
+        <span class="status-indicator online"></span>
+        <span id="syncStatusText">Synced with Main Inference Window</span>
+      </div>
+      <button class="btn btn-warning" id="flyI70Btn">📍 Fly to I-70 AT US 29</button>
+      <button class="btn btn-secondary" id="fitBoundsBtn">🎯 Fit Full US 29 / I-70 Corridor</button>
+      <button class="btn btn-primary" id="pushMapReportBtn">⚡ Push Selected Camera Report</button>
+    </div>
+  </header>
+
+  <!-- Main Map & Camera Inspector Grid -->
+  <div class="map-workspace">
+    <!-- Left: Interactive GIS Map -->
+    <div class="map-stage">
+      <div id="cityMap"></div>
+
+      <!-- Floating Top Map Controls -->
+      <div class="map-overlay-top">
+        <div class="map-glass-pill">
+          <span>Map Style:</span>
+          <select id="tileStyleSelect" class="select-input select-sm">
+            <option value="dark">CartoDB Dark Matter (Smart City)</option>
+            <option value="osm">OpenStreetMap Standard</option>
+            <option value="sat">Esri World Imagery (Satellite)</option>
+          </select>
+        </div>
+
+        <label class="map-glass-pill" style="cursor:pointer;">
+          <input type="checkbox" id="toggleCorridors" checked />
+          <span>Corridor LoS Polylines</span>
+        </label>
+
+        <label class="map-glass-pill" style="cursor:pointer;">
+          <input type="checkbox" id="toggleHotspotCircles" checked />
+          <span>DBSCAN Hotspot Radar Rings</span>
+        </label>
+      </div>
+
+      <!-- Bottom Legend -->
+      <div class="map-legend-bottom">
+        <strong style="color:#00e5ff;font-family:var(--font-mono)">GIS TELEMETRY LEGEND:</strong>
+        <span class="legend-item"><i class="legend-dot" style="background:#10b981"></i> LoS A–B (Free Flow)</span>
+        <span class="legend-item"><i class="legend-dot" style="background:#3b82f6"></i> LoS C (Stable)</span>
+        <span class="legend-item"><i class="legend-dot" style="background:#f59e0b"></i> LoS D (Approaching Unstable)</span>
+        <span class="legend-item"><i class="legend-dot" style="background:#ef4444"></i> LoS E–F / Critical DBSCAN Hotspot</span>
+        <span class="legend-item"><i class="legend-dot" style="background:#00e5ff;box-shadow:0 0 8px #00e5ff"></i> Active Main-Window Camera</span>
+      </div>
+    </div>
+
+    <!-- Right Sidebar: Selected Camera Mini-Stream Preview + Directory -->
+    <aside class="map-sidebar">
+      <div class="panel" style="padding:0.7rem;">
+        <div class="panel-header" style="margin-bottom:0.45rem;">
+          <div>
+            <h3 id="selectedCamHeader">CAM-01: I-70 AT US 29</h3>
+            <span class="sub-label" id="selectedCamGps">39.2981° N, 76.8836° W</span>
+          </div>
+          <span class="live-pill">● LIVE HUD</span>
+        </div>
+
+        <div class="mini-feed-box">
+          <canvas id="miniPreviewCanvas" width="350" height="175"></canvas>
+        </div>
+
+        <div style="display:flex;gap:0.5rem;margin-top:0.55rem;">
+          <button class="btn btn-primary" id="focusInMainWinBtn" style="flex:1;justify-content:center;">
+            📺 Switch Main Window to This Camera
+          </button>
+        </div>
+      </div>
+
+      <div class="panel" style="flex:1;display:flex;flex-direction:column;gap:0.55rem;">
+        <div class="panel-header" style="margin-bottom:0.2rem;">
+          <h3>US 29 / I-70 / MD 32 Cameras (6 Active)</h3>
+          <span class="sub-label">Click to inspect on map</span>
+        </div>
+        <div class="cam-directory-list" id="camDirectoryList"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="map.js"></script>
+</body>
+</html>

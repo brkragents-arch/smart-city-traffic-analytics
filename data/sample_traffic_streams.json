@@ -1,0 +1,647 @@
+{
+  "cameras": [
+    {
+      "id": "CAM-01",
+      "name": "I-70 AT US 29",
+      "location": "39.2981° N, 76.8836° W",
+      "lat": 39.2981,
+      "lng": -76.8836,
+      "gantrySign": "I-70 AT US 29 • EXIT 87 COLUMBIA PIKE INTERCHANGE",
+      "corridorPath": [
+        [39.2983, -76.8880],
+        [39.2981, -76.8836],
+        [39.2979, -76.8768],
+        [39.2977, -76.8705]
+      ],
+      "secondaryCorridorPath": [
+        [39.2860, -76.8795],
+        [39.2925, -76.8818],
+        [39.2981, -76.8836],
+        [39.3035, -76.8832]
+      ],
+      "lanes": 4,
+      "speedLimitKmh": 105,
+      "calibrationMetersPerPixel": 0.092,
+      "tripwireYRatio": 0.62,
+      "description": "MDOT CHART Live Interchange Camera at Interstate 70 & US Route 29 (Exit 87) monitoring cloverleaf weave lanes, multi-density congestion & tailpipe emission plumes."
+    },
+    {
+      "id": "CAM-02",
+      "name": "I-70 E at US 29",
+      "location": "39.2983° N, 76.8915° W",
+      "lat": 39.2983,
+      "lng": -76.8915,
+      "gantrySign": "I-70 EAST AT US 29 • EXIT 87A SOUTH COLUMBIA / EXIT 87B NORTH",
+      "corridorPath": [
+        [39.2986, -76.9045],
+        [39.2984, -76.8975],
+        [39.2983, -76.8915],
+        [39.2981, -76.8836]
+      ],
+      "lanes": 4,
+      "speedLimitKmh": 105,
+      "calibrationMetersPerPixel": 0.090,
+      "tripwireYRatio": 0.60,
+      "description": "MDOT CHART Eastbound I-70 approach to US 29 collector-distributor ramps with heavy commuter and diesel freight deceleration plumes."
+    },
+    {
+      "id": "CAM-06",
+      "name": "I-70 at Ex 80 MD 32",
+      "location": "39.3106° N, 76.9822° W",
+      "lat": 39.3106,
+      "lng": -76.9822,
+      "gantrySign": "I-70 AT EX 80 MD 32 • SYKESVILLE / CLARKSVILLE INTERCHANGE",
+      "corridorPath": [
+        [39.3125, -77.0010],
+        [39.3116, -76.9915],
+        [39.3106, -76.9822],
+        [39.3080, -76.9620],
+        [39.3035, -76.9320],
+        [39.2986, -76.9045]
+      ],
+      "secondaryCorridorPath": [
+        [39.2985, -76.9845],
+        [39.3045, -76.9834],
+        [39.3106, -76.9822],
+        [39.3175, -76.9808],
+        [39.3235, -76.9795]
+      ],
+      "lanes": 4,
+      "speedLimitKmh": 110,
+      "calibrationMetersPerPixel": 0.094,
+      "tripwireYRatio": 0.61,
+      "description": "MDOT CHART Live Camera on Interstate 70 at Exit 80 (MD 32 Sykesville Rd) monitoring high-speed commuter & heavy freight interchange emissions."
+    },
+    {
+      "id": "CAM-03",
+      "name": "US 29 AT MD 100",
+      "location": "39.2486° N, 76.8414° W",
+      "lat": 39.2486,
+      "lng": -76.8414,
+      "gantrySign": "US 29 AT MD 100 • EXIT 22 GLEN BURNIE / ELLICOTT CITY",
+      "corridorPath": [
+        [39.2395, -76.8482],
+        [39.2442, -76.8446],
+        [39.2486, -76.8414],
+        [39.2565, -76.8455],
+        [39.2650, -76.8540],
+        [39.2760, -76.8680],
+        [39.2860, -76.8795]
+      ],
+      "secondaryCorridorPath": [
+        [39.2450, -76.8560],
+        [39.2486, -76.8414],
+        [39.2518, -76.8265]
+      ],
+      "lanes": 4,
+      "speedLimitKmh": 100,
+      "calibrationMetersPerPixel": 0.086,
+      "tripwireYRatio": 0.62,
+      "description": "High-volume freeway interchange at US 29 (Columbia Pike) and MD 100 prone to multi-density merge shockwaves and NOx/PM2.5 hotspots."
+    },
+    {
+      "id": "CAM-04",
+      "name": "US 29 N AT MD 108",
+      "location": "39.2342° N, 76.8528° W",
+      "lat": 39.2342,
+      "lng": -76.8528,
+      "gantrySign": "US 29 NORTH AT MD 108 • EXIT 21 CLARKSVILLE / COLUMBIA",
+      "corridorPath": [
+        [39.2308, -76.8551],
+        [39.2342, -76.8528],
+        [39.2395, -76.8482]
+      ],
+      "secondaryCorridorPath": [
+        [39.2310, -76.8635],
+        [39.2342, -76.8528],
+        [39.2372, -76.8410]
+      ],
+      "lanes": 4,
+      "speedLimitKmh": 90,
+      "calibrationMetersPerPixel": 0.082,
+      "tripwireYRatio": 0.58,
+      "description": "US 29 Northbound main-line and ramp merge at MD 108 (Clarksville Pike) carrying commuter flow toward MD 100 and I-70."
+    },
+    {
+      "id": "CAM-05",
+      "name": "US 29 S AT MD 108",
+      "location": "39.2308° N, 76.8551° W",
+      "lat": 39.2308,
+      "lng": -76.8551,
+      "gantrySign": "US 29 SOUTH AT MD 108 • EXIT 21 SILVER SPRING / WASHINGTON",
+      "corridorPath": [
+        [39.2220, -76.8615],
+        [39.2265, -76.8582],
+        [39.2308, -76.8551]
+      ],
+      "lanes": 4,
+      "speedLimitKmh": 90,
+      "calibrationMetersPerPixel": 0.082,
+      "tripwireYRatio": 0.64,
+      "description": "US 29 Southbound corridor at MD 108 monitoring high-occupancy commuter lanes and exit ramp emission plumes."
+    }
+  ],
+  "initialReports": [
+    {
+      "reportId": "RPT-20261022-001",
+      "timestamp": "2026-10-22T22:02:00.000Z",
+      "cameraId": "CAM-01",
+      "cameraName": "I-70 AT US 29",
+      "agentVersion": "MultiDensity-DenStream-COPERT Agent v3.0",
+      "windowDurationSec": 300,
+      "summary": {
+        "totalVehiclesCounted": 486,
+        "northboundCount": 234,
+        "southboundCount": 252,
+        "flowRateVehPerMin": 97.2,
+        "meanSpeedKmh": 62.4,
+        "p50SpeedKmh": 64.0,
+        "p85SpeedKmh": 96.8,
+        "minSpeedKmh": 12.6,
+        "maxSpeedKmh": 118.5,
+        "overspeedCount": 31,
+        "levelOfService": "D",
+        "losDescription": "Approaching Unstable Flow — Multi-density cloverleaf merge shockwave & elevated Diesel NOx/PM2.5 plume",
+        "congestionIndex": 0.66
+      },
+      "emissionMetrics": {
+        "model": "COPERT-VSP Empirical Emission Model + Multi-Density HDBSCAN/DenStream",
+        "totalCo2Gps": 118.4,
+        "co2KgPerHour": 426.2,
+        "totalNoxMgps": 642.5,
+        "totalPm25Mgps": 34.8,
+        "totalCoMgps": 910.2,
+        "corridorAqi": 148,
+        "aqiCategory": "Unhealthy for Sensitive Groups",
+        "fleetFuelSplit": { "Gasoline": "56%", "Diesel": "26%", "Hybrid": "12%", "EV": "6%" },
+        "avgFleetAgeYears": 6.1,
+        "avgEngineCapacityL": 3.4
+      },
+      "classDistribution": {
+        "Car": 334,
+        "SUV / Van": 68,
+        "Truck": 58,
+        "Bus": 15,
+        "Motorcycle": 11
+      },
+      "clusteringMetrics": {
+        "algorithm": "Autonomous Multi-Density HDBSCAN / DenStream (No pre-specified k, Mutual-Reachability Spatial-Velocity-Emission Clustering)",
+        "activeHotspots": 2,
+        "peakClusterDensity": 8.3,
+        "clusters": [
+          {
+            "clusterId": "PH-101",
+            "zoneLabel": "I-70 WB / US 29 NB Cloverleaf Weave Zone (Y: 230m–305m)",
+            "centroid": { "x": 560, "y": 280 },
+            "radiusPx": 86,
+            "vehicleCount": 9,
+            "avgSpeedKmh": 18.4,
+            "dwellTimeSec": 46.0,
+            "densityRegime": "ULTRA-DENSE SMOG CORE",
+            "co2Gps": 68.4,
+            "noxMgps": 412.0,
+            "pm25Mgps": 22.4,
+            "localAqi": 168,
+            "severity": "CRITICAL",
+            "severityScore": 91,
+            "cause": "Stop-and-go weaving shockwave with 3 heavy-duty Class-8 Diesel trucks (10.8L, Euro 4) & 6 passenger cars"
+          },
+          {
+            "clusterId": "PH-102",
+            "zoneLabel": "US 29 SB Collector-Distributor Exit 87A",
+            "centroid": { "x": 265, "y": 210 },
+            "radiusPx": 66,
+            "vehicleCount": 5,
+            "avgSpeedKmh": 29.2,
+            "dwellTimeSec": 22.5,
+            "densityRegime": "HIGH-DENSITY PLUME",
+            "co2Gps": 31.8,
+            "noxMgps": 168.5,
+            "pm25Mgps": 8.9,
+            "localAqi": 122,
+            "severity": "HIGH",
+            "severityScore": 73,
+            "cause": "Freight deceleration platoon entering US 29 Southbound loop ramp"
+          }
+        ]
+      },
+      "recommendations": [
+        "[ECO-VSL HARMONIZATION] Set dynamic Variable Speed Limit to 80 km/h 1.2 km upstream of I-70 AT US 29 to dissolve Ultra-Dense Smog Core PH-101 (68.4 g/s CO2, Local AQI 168).",
+        "[LOW-EMISSION FREIGHT ROUTING] Divert through-bound heavy Diesel trucks (>12t) to left express lanes at Exit 87 to cut ramp weave NOx by ~34%.",
+        "[RAMP METERING] Activate adaptive green wave on US 29 NB loop onto I-70 WB."
+      ],
+      "anomalies": [
+        {
+          "timeOffset": "-01:15",
+          "type": "MULTI_DENSITY_POLLUTION_HOTSPOT",
+          "detail": "Cluster PH-101 [ULTRA-DENSE SMOG CORE] autonomously discovered at I-70 AT US 29: 9 veh @ 18.4 km/h emitting 68.4 g/s CO2 & 412 mg/s NOx (AQI 168)."
+        }
+      ]
+    },
+    {
+      "reportId": "RPT-20261022-002",
+      "timestamp": "2026-10-22T22:04:00.000Z",
+      "cameraId": "CAM-02",
+      "cameraName": "I-70 E at US 29",
+      "agentVersion": "MultiDensity-DenStream-COPERT Agent v3.0",
+      "windowDurationSec": 300,
+      "summary": {
+        "totalVehiclesCounted": 442,
+        "northboundCount": 210,
+        "southboundCount": 232,
+        "flowRateVehPerMin": 88.4,
+        "meanSpeedKmh": 54.6,
+        "p50SpeedKmh": 56.2,
+        "p85SpeedKmh": 88.0,
+        "minSpeedKmh": 10.4,
+        "maxSpeedKmh": 114.0,
+        "overspeedCount": 22,
+        "levelOfService": "D",
+        "losDescription": "Approaching Unstable Flow — Right-lane queue spillback & high tailpipe CO2/NOx plume at Exit 87A",
+        "congestionIndex": 0.71
+      },
+      "emissionMetrics": {
+        "model": "COPERT-VSP Empirical Emission Model + Multi-Density HDBSCAN/DenStream",
+        "totalCo2Gps": 104.6,
+        "co2KgPerHour": 376.6,
+        "totalNoxMgps": 558.0,
+        "totalPm25Mgps": 29.4,
+        "totalCoMgps": 815.0,
+        "corridorAqi": 136,
+        "aqiCategory": "Unhealthy for Sensitive Groups",
+        "fleetFuelSplit": { "Gasoline": "57%", "Diesel": "25%", "Hybrid": "12%", "EV": "6%" },
+        "avgFleetAgeYears": 5.9,
+        "avgEngineCapacityL": 3.3
+      },
+      "classDistribution": {
+        "Car": 302,
+        "SUV / Van": 61,
+        "Truck": 54,
+        "Bus": 14,
+        "Motorcycle": 11
+      },
+      "clusteringMetrics": {
+        "algorithm": "Autonomous Multi-Density HDBSCAN / DenStream (No pre-specified k, Mutual-Reachability Spatial-Velocity-Emission Clustering)",
+        "activeHotspots": 1,
+        "peakClusterDensity": 7.8,
+        "clusters": [
+          {
+            "clusterId": "PH-201",
+            "zoneLabel": "I-70 EB Right Deceleration Lane to Exit 87A",
+            "centroid": { "x": 590, "y": 310 },
+            "radiusPx": 84,
+            "vehicleCount": 8,
+            "avgSpeedKmh": 16.5,
+            "dwellTimeSec": 39.0,
+            "densityRegime": "ULTRA-DENSE SMOG CORE",
+            "co2Gps": 59.2,
+            "noxMgps": 348.0,
+            "pm25Mgps": 18.6,
+            "localAqi": 154,
+            "severity": "CRITICAL",
+            "severityScore": 86,
+            "cause": "High exit demand & idling Diesel freight queue backing up from US 29 Southbound ramp"
+          }
+        ]
+      },
+      "recommendations": [
+        "[ECO-QUEUE WARNING] Activate I-70 EB Milepost 81.5 DMS: 'EXIT 87A QUEUED — ECO-DECELERATE EARLY TO REDUCE IDLE EMISSIONS'.",
+        "[RAMP FLUSH] Extend downstream US 29 SB merge priority to clear Hotspot PH-201 (59.2 g/s CO2)."
+      ],
+      "anomalies": [
+        {
+          "timeOffset": "-02:05",
+          "type": "EXIT_RAMP_POLLUTION_PLUME",
+          "detail": "Cluster PH-201 on I-70 E at US 29 deceleration lane reached Local AQI 154 (8 vehicles @ 16.5 km/h)."
+        }
+      ]
+    },
+    {
+      "reportId": "RPT-20261022-003",
+      "timestamp": "2026-10-22T22:05:30.000Z",
+      "cameraId": "CAM-03",
+      "cameraName": "US 29 AT MD 100",
+      "agentVersion": "MultiDensity-DenStream-COPERT Agent v3.0",
+      "windowDurationSec": 300,
+      "summary": {
+        "totalVehiclesCounted": 518,
+        "northboundCount": 264,
+        "southboundCount": 254,
+        "flowRateVehPerMin": 103.6,
+        "meanSpeedKmh": 44.2,
+        "p50SpeedKmh": 42.8,
+        "p85SpeedKmh": 78.4,
+        "minSpeedKmh": 7.8,
+        "maxSpeedKmh": 109.2,
+        "overspeedCount": 18,
+        "levelOfService": "E",
+        "losDescription": "Unstable / Capacity Flow — Dual multi-density congestion & pollution hotspots at MD 100 flyover merge",
+        "congestionIndex": 0.81
+      },
+      "emissionMetrics": {
+        "model": "COPERT-VSP Empirical Emission Model + Multi-Density HDBSCAN/DenStream",
+        "totalCo2Gps": 134.8,
+        "co2KgPerHour": 485.3,
+        "totalNoxMgps": 718.4,
+        "totalPm25Mgps": 39.2,
+        "totalCoMgps": 1045.0,
+        "corridorAqi": 164,
+        "aqiCategory": "Unhealthy (High Congestion Plume)",
+        "fleetFuelSplit": { "Gasoline": "59%", "Diesel": "23%", "Hybrid": "12%", "EV": "6%" },
+        "avgFleetAgeYears": 6.0,
+        "avgEngineCapacityL": 3.2
+      },
+      "classDistribution": {
+        "Car": 362,
+        "SUV / Van": 76,
+        "Truck": 48,
+        "Bus": 20,
+        "Motorcycle": 12
+      },
+      "clusteringMetrics": {
+        "algorithm": "Autonomous Multi-Density HDBSCAN / DenStream (No pre-specified k, Mutual-Reachability Spatial-Velocity-Emission Clustering)",
+        "activeHotspots": 2,
+        "peakClusterDensity": 9.4,
+        "clusters": [
+          {
+            "clusterId": "PH-301",
+            "zoneLabel": "US 29 SB at MD 100 Flyover Merge (Y: 250m–330m)",
+            "centroid": { "x": 555, "y": 295 },
+            "radiusPx": 92,
+            "vehicleCount": 10,
+            "avgSpeedKmh": 13.8,
+            "dwellTimeSec": 54.0,
+            "densityRegime": "ULTRA-DENSE SMOG CORE",
+            "co2Gps": 76.5,
+            "noxMgps": 445.0,
+            "pm25Mgps": 24.8,
+            "localAqi": 176,
+            "severity": "CRITICAL",
+            "severityScore": 93,
+            "cause": "Two-lane flyover merge from MD 100 WB compressing US 29 SB into severe stop-and-go emission hotspot"
+          },
+          {
+            "clusterId": "PH-302",
+            "zoneLabel": "US 29 NB Collector Exit 22 to MD 100 EB",
+            "centroid": { "x": 270, "y": 225 },
+            "radiusPx": 70,
+            "vehicleCount": 6,
+            "avgSpeedKmh": 24.1,
+            "dwellTimeSec": 28.0,
+            "densityRegime": "HIGH-DENSITY PLUME",
+            "co2Gps": 38.2,
+            "noxMgps": 195.0,
+            "pm25Mgps": 10.4,
+            "localAqi": 129,
+            "severity": "HIGH",
+            "severityScore": 75,
+            "cause": "Commuter & transit bus platoon decelerating into MD 100 Eastbound loop ramp"
+          }
+        ]
+      },
+      "recommendations": [
+        "[ECO-SPEED HARMONIZATION] Lower US 29 SB Variable Speed Limit to 70 km/h 1 km north of MD 100 to cut PH-301 stop-and-go CO2/NOx emissions by ~28%.",
+        "[TRANSIT & ECO PRIORITY] Grant shoulder bypass priority to low-emission transit buses at MD 100 interchange."
+      ],
+      "anomalies": [
+        {
+          "timeOffset": "-01:50",
+          "type": "CRITICAL_POLLUTION_HOTSPOT",
+          "detail": "Cluster PH-301 [ULTRA-DENSE SMOG CORE] at US 29 AT MD 100 reached 76.5 g/s CO2 & Local AQI 176."
+        }
+      ]
+    },
+    {
+      "reportId": "RPT-20261022-004",
+      "timestamp": "2026-10-22T22:06:20.000Z",
+      "cameraId": "CAM-04",
+      "cameraName": "US 29 N AT MD 108",
+      "agentVersion": "MultiDensity-DenStream-COPERT Agent v3.0",
+      "windowDurationSec": 300,
+      "summary": {
+        "totalVehiclesCounted": 364,
+        "northboundCount": 218,
+        "southboundCount": 146,
+        "flowRateVehPerMin": 72.8,
+        "meanSpeedKmh": 68.5,
+        "p50SpeedKmh": 71.0,
+        "p85SpeedKmh": 89.4,
+        "minSpeedKmh": 24.5,
+        "maxSpeedKmh": 104.2,
+        "overspeedCount": 19,
+        "levelOfService": "B",
+        "losDescription": "Reasonably Free Flow — Minor dispersed acceleration plume at MD 108 on-ramp",
+        "congestionIndex": 0.34
+      },
+      "emissionMetrics": {
+        "model": "COPERT-VSP Empirical Emission Model + Multi-Density HDBSCAN/DenStream",
+        "totalCo2Gps": 64.2,
+        "co2KgPerHour": 231.1,
+        "totalNoxMgps": 284.0,
+        "totalPm25Mgps": 14.2,
+        "totalCoMgps": 512.0,
+        "corridorAqi": 78,
+        "aqiCategory": "Moderate",
+        "fleetFuelSplit": { "Gasoline": "60%", "Diesel": "18%", "Hybrid": "15%", "EV": "7%" },
+        "avgFleetAgeYears": 5.2,
+        "avgEngineCapacityL": 2.7
+      },
+      "classDistribution": {
+        "Car": 258,
+        "SUV / Van": 52,
+        "Truck": 31,
+        "Bus": 15,
+        "Motorcycle": 8
+      },
+      "clusteringMetrics": {
+        "algorithm": "Autonomous Multi-Density HDBSCAN / DenStream (No pre-specified k, Mutual-Reachability Spatial-Velocity-Emission Clustering)",
+        "activeHotspots": 1,
+        "peakClusterDensity": 4.5,
+        "clusters": [
+          {
+            "clusterId": "PH-401",
+            "zoneLabel": "US 29 NB Auxiliary Merge from MD 108",
+            "centroid": { "x": 385, "y": 280 },
+            "radiusPx": 64,
+            "vehicleCount": 4,
+            "avgSpeedKmh": 31.4,
+            "dwellTimeSec": 18.0,
+            "densityRegime": "DISPERSED TRANSITION CLUSTER",
+            "co2Gps": 21.4,
+            "noxMgps": 112.0,
+            "pm25Mgps": 5.6,
+            "localAqi": 88,
+            "severity": "MODERATE",
+            "severityScore": 54,
+            "cause": "High-load engine acceleration VSP spike from MD 108 uphill on-ramp onto US 29 NB"
+          }
+        ]
+      },
+      "recommendations": [
+        "[ECO-FLOW NOMINAL] Corridor operating at LoS B (64.2 g/s CO2, Corridor AQI 78); maintain smooth progression toward MD 100."
+      ],
+      "anomalies": [
+        {
+          "timeOffset": "-00:55",
+          "type": "ONRAMP_VSP_EMISSION_PLUME",
+          "detail": "Dispersed cluster PH-401 detected on MD 108 on-ramp (4 accelerating vehicles emitting 21.4 g/s CO2)."
+        }
+      ]
+    },
+    {
+      "reportId": "RPT-20261022-005",
+      "timestamp": "2026-10-22T22:07:10.000Z",
+      "cameraId": "CAM-05",
+      "cameraName": "US 29 S AT MD 108",
+      "agentVersion": "MultiDensity-DenStream-COPERT Agent v3.0",
+      "windowDurationSec": 300,
+      "summary": {
+        "totalVehiclesCounted": 392,
+        "northboundCount": 162,
+        "southboundCount": 230,
+        "flowRateVehPerMin": 78.4,
+        "meanSpeedKmh": 57.2,
+        "p50SpeedKmh": 59.0,
+        "p85SpeedKmh": 82.6,
+        "minSpeedKmh": 19.2,
+        "maxSpeedKmh": 101.5,
+        "overspeedCount": 16,
+        "levelOfService": "C",
+        "losDescription": "Stable Flow — Moderate deceleration emission cluster at Exit 21 off-ramp",
+        "congestionIndex": 0.48
+      },
+      "emissionMetrics": {
+        "model": "COPERT-VSP Empirical Emission Model + Multi-Density HDBSCAN/DenStream",
+        "totalCo2Gps": 78.5,
+        "co2KgPerHour": 282.6,
+        "totalNoxMgps": 362.0,
+        "totalPm25Mgps": 18.4,
+        "totalCoMgps": 618.0,
+        "corridorAqi": 94,
+        "aqiCategory": "Moderate",
+        "fleetFuelSplit": { "Gasoline": "59%", "Diesel": "20%", "Hybrid": "14%", "EV": "7%" },
+        "avgFleetAgeYears": 5.5,
+        "avgEngineCapacityL": 2.9
+      },
+      "classDistribution": {
+        "Car": 276,
+        "SUV / Van": 58,
+        "Truck": 34,
+        "Bus": 16,
+        "Motorcycle": 8
+      },
+      "clusteringMetrics": {
+        "algorithm": "Autonomous Multi-Density HDBSCAN / DenStream (No pre-specified k, Mutual-Reachability Spatial-Velocity-Emission Clustering)",
+        "activeHotspots": 1,
+        "peakClusterDensity": 5.2,
+        "clusters": [
+          {
+            "clusterId": "PH-501",
+            "zoneLabel": "US 29 SB Exit 21 Deceleration Lane (MD 108)",
+            "centroid": { "x": 580, "y": 305 },
+            "radiusPx": 68,
+            "vehicleCount": 5,
+            "avgSpeedKmh": 25.6,
+            "dwellTimeSec": 23.5,
+            "densityRegime": "HIGH-DENSITY PLUME",
+            "co2Gps": 28.6,
+            "noxMgps": 144.0,
+            "pm25Mgps": 7.2,
+            "localAqi": 106,
+            "severity": "MODERATE",
+            "severityScore": 61,
+            "cause": "Signalized intersection queue on MD 108 Clarksville Pike extending onto exit ramp"
+          }
+        ]
+      },
+      "recommendations": [
+        "[ADAPTIVE GREEN EXTENSION] Extend MD 108 WB off-ramp green split by +10s to flush Exit 21 queue plume PH-501 (28.6 g/s CO2)."
+      ],
+      "anomalies": [
+        {
+          "timeOffset": "-01:10",
+          "type": "RAMP_QUEUE_EMISSION_CLUSTER",
+          "detail": "Cluster PH-501 detected on US 29 S AT MD 108 exit lane (5 vehicles @ 25.6 km/h, Local AQI 106)."
+        }
+      ]
+    },
+    {
+      "reportId": "RPT-20261022-006",
+      "timestamp": "2026-10-22T22:08:00.000Z",
+      "cameraId": "CAM-06",
+      "cameraName": "I-70 at Ex 80 MD 32",
+      "agentVersion": "MultiDensity-DenStream-COPERT Agent v3.0",
+      "windowDurationSec": 300,
+      "summary": {
+        "totalVehiclesCounted": 428,
+        "northboundCount": 204,
+        "southboundCount": 224,
+        "flowRateVehPerMin": 85.6,
+        "meanSpeedKmh": 58.9,
+        "p50SpeedKmh": 61.5,
+        "p85SpeedKmh": 94.2,
+        "minSpeedKmh": 14.0,
+        "maxSpeedKmh": 121.0,
+        "overspeedCount": 26,
+        "levelOfService": "D",
+        "losDescription": "Approaching Unstable Flow — Heavy freight merge compression & diesel NOx plume at Exit 80 (MD 32)",
+        "congestionIndex": 0.64
+      },
+      "emissionMetrics": {
+        "model": "COPERT-VSP Empirical Emission Model + Multi-Density HDBSCAN/DenStream",
+        "totalCo2Gps": 112.2,
+        "co2KgPerHour": 403.9,
+        "totalNoxMgps": 615.0,
+        "totalPm25Mgps": 33.1,
+        "totalCoMgps": 864.0,
+        "corridorAqi": 142,
+        "aqiCategory": "Unhealthy for Sensitive Groups",
+        "fleetFuelSplit": { "Gasoline": "54%", "Diesel": "29%", "Hybrid": "11%", "EV": "6%" },
+        "avgFleetAgeYears": 6.4,
+        "avgEngineCapacityL": 3.7
+      },
+      "classDistribution": {
+        "Car": 292,
+        "SUV / Van": 60,
+        "Truck": 55,
+        "Bus": 12,
+        "Motorcycle": 9
+      },
+      "clusteringMetrics": {
+        "algorithm": "Autonomous Multi-Density HDBSCAN / DenStream (No pre-specified k, Mutual-Reachability Spatial-Velocity-Emission Clustering)",
+        "activeHotspots": 1,
+        "peakClusterDensity": 7.2,
+        "clusters": [
+          {
+            "clusterId": "PH-601",
+            "zoneLabel": "I-70 EB at Exit 80 (MD 32 NB On-Ramp Weave)",
+            "centroid": { "x": 570, "y": 290 },
+            "radiusPx": 82,
+            "vehicleCount": 7,
+            "avgSpeedKmh": 19.6,
+            "dwellTimeSec": 36.5,
+            "densityRegime": "HIGH-DENSITY PLUME",
+            "co2Gps": 54.8,
+            "noxMgps": 336.0,
+            "pm25Mgps": 18.2,
+            "localAqi": 149,
+            "severity": "HIGH",
+            "severityScore": 81,
+            "cause": "Heavy freight & commuter merge from MD 32 NB onto I-70 EB (high Diesel 10.8L truck share)"
+          }
+        ]
+      },
+      "recommendations": [
+        "[ECO-MERGE ADVISORY] Activate MDOT CHART DMS upstream of Exit 80: 'HEAVY MERGE AT MD-32 — THRU FREIGHT USE LEFT LANE TO REDUCE EMISSIONS'.",
+        "[RAMP METERING] Coordinate adaptive ramp metering from MD 32 NB onto I-70 EB when Hotspot PH-601 exceeds 140 AQI."
+      ],
+      "anomalies": [
+        {
+          "timeOffset": "-01:25",
+          "type": "FREIGHT_EMISSION_HOTSPOT",
+          "detail": "Cluster PH-601 [HIGH-DENSITY PLUME] at I-70 at Ex 80 MD 32 emitting 54.8 g/s CO2 & 336 mg/s NOx (Local AQI 149)."
+        }
+      ]
+    }
+  ]
+}
