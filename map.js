@@ -37,6 +37,61 @@ const CALLOUT_OFFSETS = {
   'CAM-04': 'offset-right'  // US 29 N AT MD 108 -> right (Northbound side)
 };
 
+
+// Guaranteed Authoritative Maryland Corridor Cameras (Seed on init so map NEVER renders empty)
+const DEFAULT_CAMERAS = [
+  {
+    id: 'CAM-01',
+    name: 'I-70 AT US 29',
+    location: '39.2877° N, 76.8398° W',
+    lat: 39.2877,
+    lng: -76.8398,
+    gantrySign: 'I-70 AT US 29 • EXIT 87 COLUMBIA PIKE INTERCHANGE',
+    speedLimitKmh: 105,
+    description: 'MDOT Live Interchange Camera at Interstate 70 & US Route 29 (Exit 87) monitoring cloverleaf weave lanes, multi-density congestion & tailpipe emission plumes.'
+  },
+  {
+    id: 'CAM-06',
+    name: 'I-70 at Ex 80 MD 32',
+    location: '39.3083° N, 76.9525° W',
+    lat: 39.3083,
+    lng: -76.9525,
+    gantrySign: 'I-70 AT EX 80 MD 32 • SYKESVILLE / CLARKSVILLE INTERCHANGE',
+    speedLimitKmh: 110,
+    description: 'MDOT Live Camera on Interstate 70 at Exit 80 (MD 32 Sykesville Rd, West Friendship) monitoring high-speed commuter & heavy freight interchange emissions.'
+  },
+  {
+    id: 'CAM-07',
+    name: 'I-695 AT BALT NATL PK',
+    location: '39.2888° N, 76.7426° W',
+    lat: 39.2888,
+    lng: -76.7426,
+    gantrySign: 'I-695 AT BALT NATL PK • EXIT 15 US 40 CATONSVILLE',
+    speedLimitKmh: 100,
+    description: 'MDOT Live Camera on I-695 (Baltimore Beltway) at Exit 15 (US 40 Baltimore National Pike, Catonsville) monitoring high-density beltway commuter & freight weave lanes and tailpipe emission plumes.'
+  },
+  {
+    id: 'CAM-03',
+    name: 'US 29 AT MD 100',
+    location: '39.2435° N, 76.8195° W',
+    lat: 39.2435,
+    lng: -76.8195,
+    gantrySign: 'US 29 AT MD 100 • EXIT 22 GLEN BURNIE / ELLICOTT CITY',
+    speedLimitKmh: 100,
+    description: 'High-volume freeway interchange at US 29 (Columbia Pike) and MD 100 (Exit 22 near Long Gate) prone to multi-density merge shockwaves and NOx/PM2.5 hotspots.'
+  },
+  {
+    id: 'CAM-04',
+    name: 'US 29 N AT MD 108',
+    location: '39.2295° N, 76.8346° W',
+    lat: 39.2295,
+    lng: -76.8346,
+    gantrySign: 'US 29 NORTH AT MD 108 • EXIT 21 CLARKSVILLE / COLUMBIA',
+    speedLimitKmh: 90,
+    description: 'US 29 Northbound main-line and ramp merge at MD 108 (Clarksville Pike, Exit 21) carrying commuter flow toward MD 100 and I-70.'
+  }
+];
+
 // Authoritative Maryland Highway Overpass Coordinates & Polylines (Howard & Baltimore County, MD)
 const VERIFIED_MD_CAMERA_GIS = {
   'CAM-01': {
@@ -157,35 +212,60 @@ function losColor(los) {
 
 async function initMapWindow() {
   map = L.map('cityMap', {
-    center: [39.265, -76.855],
+    center: [39.275, -76.845],
     zoom: 12,
     zoomControl: true
   });
 
   setTileStyle('dark');
 
+  // Immediately initialize with guaranteed default camera set so markers appear instantly
+  cameras = DEFAULT_CAMERAS.map((c) => ({
+    ...c,
+    ...(VERIFIED_MD_CAMERA_GIS[c.id] || {})
+  }));
+
   try {
-    const res = await fetch('/api/bootstrap');
-    const data = await res.json();
-    cameras = (data.cameras || [])
-      .filter((c) => Boolean(VERIFIED_MD_CAMERA_GIS[c.id]))
-      .map((c) => {
-        const verified = VERIFIED_MD_CAMERA_GIS[c.id];
-        return verified ? { ...c, ...verified } : c;
-      });
-    reports = (data.reports || []).filter((r) => Boolean(VERIFIED_MD_CAMERA_GIS[r.cameraId]));
-    if (!cameras.some((c) => c.id === 'CAM-07')) {
-      const staticRes = await fetch('./data/sample_traffic_streams.json');
-      if (staticRes.ok) {
-        const raw = await staticRes.json();
-        cameras = (raw.cameras || [])
-          .filter((c) => Boolean(VERIFIED_MD_CAMERA_GIS[c.id]))
-          .map((c) => ({ ...c, ...(VERIFIED_MD_CAMERA_GIS[c.id] || {}) }));
-        reports = (raw.initialReports || []).filter((r) => Boolean(VERIFIED_MD_CAMERA_GIS[r.cameraId]));
+    let data = null;
+    try {
+      const res = await fetch('/api/bootstrap');
+      if (res && res.ok) {
+        data = await res.json();
       }
+    } catch (_) {}
+
+    if (!data) {
+      try {
+        const staticRes = await fetch('./data/sample_traffic_streams.json');
+        if (staticRes && staticRes.ok) {
+          data = await staticRes.json();
+        }
+      } catch (_) {}
+    }
+
+    if (data && Array.isArray(data.cameras) && data.cameras.length > 0) {
+      const dropped = new Set(['CAM-02', 'CAM-05']);
+      const filtered = data.cameras.filter((c) => !dropped.has(c.id));
+      if (filtered.length > 0) {
+        cameras = filtered.map((c) => ({
+          ...c,
+          ...(VERIFIED_MD_CAMERA_GIS[c.id] || {})
+        }));
+      }
+      reports = (data.reports || data.initialReports || []).filter(
+        (r) => !dropped.has(r.cameraId)
+      );
     }
   } catch (err) {
-    console.error('Failed to bootstrap map data:', err);
+    console.warn('Bootstrap fallback note:', err);
+  }
+
+  // Final sanity check: ensure cameras is never empty
+  if (!cameras || cameras.length === 0) {
+    cameras = DEFAULT_CAMERAS.map((c) => ({
+      ...c,
+      ...(VERIFIED_MD_CAMERA_GIS[c.id] || {})
+    }));
   }
 
   seedCameraTelemetry();
@@ -193,8 +273,11 @@ async function initMapWindow() {
   renderAllMapLayers();
 
   if (cameras.length > 0) {
-    const bounds = L.latLngBounds(cameras.map((c) => [c.lat, c.lng]));
-    map.fitBounds(bounds.pad(0.18));
+    const validCams = cameras.filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng));
+    if (validCams.length > 0) {
+      const bounds = L.latLngBounds(validCams.map((c) => [c.lat, c.lng]));
+      map.fitBounds(bounds.pad(0.18));
+    }
   }
 
   renderCameraDirectory();
@@ -202,8 +285,22 @@ async function initMapWindow() {
   bindMapWindowEvents();
   connectSSE();
 
-  // Query live MDOT SHA CHART GIS Server & OpenStreetMap Overpass API to snap to exact official camera & overpass coordinates
-  syncExactMdotAndOsmCoordinates();
+  // Invalidate size to ensure Leaflet renders all tiles & markers across CSS Grid
+  setTimeout(() => {
+    if (map) {
+      map.invalidateSize();
+      if (cameras.length > 0) {
+        const validCams = cameras.filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng));
+        if (validCams.length > 0) {
+          const bounds = L.latLngBounds(validCams.map((c) => [c.lat, c.lng]));
+          map.fitBounds(bounds.pad(0.18));
+        }
+      }
+    }
+  }, 200);
+
+  setTimeout(() => { if (map) map.invalidateSize(); }, 600);
+  window.addEventListener('resize', () => { if (map) map.invalidateSize(); });
 
   syncChannel.postMessage({ type: 'REQUEST_LIVE_STATE' });
   requestAnimationFrame(renderMiniPreviewLoop);
