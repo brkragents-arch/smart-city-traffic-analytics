@@ -17,7 +17,7 @@ let cameras = [];
 let activeCamera = {
   id: 'CAM-01',
   name: 'I-70 AT US 29',
-  location: '39.2981° N, 76.8836° W',
+  location: '39.2877° N, 76.8398° W',
   gantrySign: 'I-70 AT US 29 • EXIT 87 COLUMBIA PIKE INTERCHANGE',
   speedLimitKmh: 105,
   calibrationMetersPerPixel: 0.092,
@@ -259,8 +259,24 @@ async function initApp() {
       }
     }
     if (data) {
-      cameras = data.cameras || [];
-      reports = data.reports || [];
+      const droppedIds = new Set(['CAM-02', 'CAM-05']);
+      cameras = (data.cameras || []).filter((c) => !droppedIds.has(c.id));
+      reports = (data.reports || []).filter((r) => !droppedIds.has(r.cameraId));
+      if (!cameras.some((c) => c.id === 'CAM-07')) {
+        try {
+          const staticRes = await fetch('./data/sample_traffic_streams.json');
+          if (staticRes.ok) {
+            const raw = await staticRes.json();
+            cameras = (raw.cameras || []).filter((c) => !droppedIds.has(c.id));
+            const repIds = new Set(reports.map((r) => r.reportId));
+            for (const r of raw.initialReports || []) {
+              if (!droppedIds.has(r.cameraId) && !repIds.has(r.reportId)) {
+                reports.unshift(r);
+              }
+            }
+          }
+        } catch (_) {}
+      }
       if (cameras.length > 0) {
         activeCamera = cameras[0];
       }
