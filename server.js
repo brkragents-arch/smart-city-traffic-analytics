@@ -559,6 +559,21 @@ function generateAgentReport(payload) {
 
 // API Routes
 app.get('/api/bootstrap', (req, res) => {
+  try {
+    sampleData = JSON.parse(fs.readFileSync(sampleDataPath, 'utf8'));
+    const activeCamIds = new Set((sampleData.cameras || []).map((c) => c.id));
+    const existingReportIds = new Set(reportsStore.map((r) => r.reportId));
+    for (const initRep of sampleData.initialReports || []) {
+      if (!existingReportIds.has(initRep.reportId)) {
+        reportsStore.push(initRep);
+      }
+    }
+    reportsStore = reportsStore
+      .filter((r) => activeCamIds.has(r.cameraId))
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  } catch (e) {
+    console.error('Error reloading sample_traffic_streams.json:', e);
+  }
   res.json({
     cameras: sampleData.cameras,
     reports: reportsStore
@@ -566,6 +581,8 @@ app.get('/api/bootstrap', (req, res) => {
 });
 
 app.get('/api/reports', (req, res) => {
+  const activeCamIds = new Set((sampleData.cameras || []).map((c) => c.id));
+  reportsStore = reportsStore.filter((r) => activeCamIds.has(r.cameraId));
   const { cameraId } = req.query;
   if (cameraId && cameraId !== 'ALL') {
     return res.json(reportsStore.filter((r) => r.cameraId === cameraId));

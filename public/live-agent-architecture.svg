@@ -1,0 +1,253 @@
+<svg viewBox="0 0 1200 730" width="1200" height="730" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070b14"/>
+      <stop offset="50%" stop-color="#0d1527"/>
+      <stop offset="100%" stop-color="#070c18"/>
+    </linearGradient>
+    <linearGradient id="cyanBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f2942" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#091929" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="amberBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b2510" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#1f1409" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="emeraldBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d3327" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#071c15" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="purpleBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1b4e" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#150d2a" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="roseBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3f1525" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#230b14" stop-opacity="0.98"/>
+    </linearGradient>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrowRose" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="730" rx="14" fill="url(#bgGrad)" />
+
+  <g stroke="#1e293b" stroke-width="0.6" opacity="0.45">
+    <line x1="0" y1="90" x2="1200" y2="90" />
+    <line x1="0" y1="220" x2="1200" y2="220" />
+    <line x1="0" y1="350" x2="1200" y2="350" />
+    <line x1="0" y1="480" x2="1200" y2="480" />
+    <line x1="0" y1="610" x2="1200" y2="610" />
+    <line x1="310" y1="50" x2="310" y2="700" stroke-dasharray="4 4" />
+    <line x1="600" y1="50" x2="600" y2="700" stroke-dasharray="4 4" />
+    <line x1="910" y1="50" x2="910" y2="700" stroke-dasharray="4 4" />
+  </g>
+
+  <g font-size="12" font-weight="700" letter-spacing="1.2">
+    <rect x="20" y="16" width="275" height="32" rx="6" fill="#0f172a" stroke="#1e293b" />
+    <text x="157" y="36" fill="#38bdf8" text-anchor="middle">1. VIDEO &amp; EDGE PRODUCERS</text>
+
+    <rect x="320" y="16" width="265" height="32" rx="6" fill="#0f172a" stroke="#1e293b" />
+    <text x="452" y="36" fill="#fbbf24" text-anchor="middle">2. LIVE AGENT CALL TRANSPORT</text>
+
+    <rect x="610" y="16" width="285" height="32" rx="6" fill="#0f172a" stroke="#1e293b" />
+    <text x="752" y="36" fill="#10b981" text-anchor="middle">3. AUTONOMOUS AGENT ENGINE</text>
+
+    <rect x="920" y="16" width="260" height="32" rx="6" fill="#0f172a" stroke="#1e293b" />
+    <text x="1050" y="36" fill="#c084fc" text-anchor="middle">4. REAL-TIME UI &amp; GIS CONSUMERS</text>
+  </g>
+
+  <!-- COLUMN 1 -->
+  <g>
+    <rect x="24" y="68" width="265" height="118" rx="10" fill="url(#cyanBox)" stroke="#0284c7" stroke-width="1.5" />
+    <text x="40" y="92" fill="#38bdf8" font-size="13" font-weight="700">Traffic Stream Sources</text>
+    <text x="40" y="112" fill="#e2e8f0" font-size="12">• 6 Smart Corridor Feeds (CAM-01..06)</text>
+    <text x="40" y="130" fill="#94a3b8" font-size="12">  IDM Car-Following + Shockwave Sim</text>
+    <text x="40" y="150" fill="#e2e8f0" font-size="12">• Custom Video Upload (.mp4 / .webm)</text>
+    <text x="40" y="168" fill="#94a3b8" font-size="12">  TensorFlow.js COCO-SSD Object Detection</text>
+  </g>
+
+  <g>
+    <rect x="24" y="215" width="265" height="215" rx="10" fill="url(#cyanBox)" stroke="#00e5ff" stroke-width="1.8" />
+    <rect x="38" y="229" width="128" height="20" rx="4" fill="#00e5ff" fill-opacity="0.18" />
+    <text x="46" y="243" fill="#00e5ff" font-size="12" font-family="monospace" font-weight="700">public/app.js</text>
+    <text x="40" y="268" fill="#f8fafc" font-size="14" font-weight="700">Browser Edge Telemetry Agent</text>
+    <text x="40" y="290" fill="#cbd5e1" font-size="12">1. Multi-Object Tracking &amp; Tripwire</text>
+    <text x="40" y="308" fill="#94a3b8" font-size="12">   NB/SB counts, P50/P85 speed (km/h)</text>
+    <text x="40" y="330" fill="#cbd5e1" font-size="12">2. Live COPERT-VSP Edge Calculator</text>
+    <text x="40" y="348" fill="#94a3b8" font-size="12">   Per-vehicle CO2, NOx, PM2.5, CO rates</text>
+    <text x="40" y="370" fill="#cbd5e1" font-size="12">3. Trigger Dispatchers:</text>
+    <text x="40" y="388" fill="#38bdf8" font-size="12" font-family="monospace">   • 25s Auto-Push Timer</text>
+    <text x="40" y="406" fill="#38bdf8" font-size="12" font-family="monospace">   • Manual "Push Agent Report"</text>
+  </g>
+
+  <g>
+    <rect x="24" y="460" width="265" height="175" rx="10" fill="url(#amberBox)" stroke="#f59e0b" stroke-width="1.8" />
+    <rect x="38" y="474" width="205" height="20" rx="4" fill="#f59e0b" fill-opacity="0.2" />
+    <text x="46" y="488" fill="#fbbf24" font-size="12" font-family="monospace" font-weight="700">agent/yolo_stream_agent.py</text>
+    <text x="40" y="513" fill="#f8fafc" font-size="14" font-weight="700">Python YOLOv8 Stream Worker</text>
+    <text x="40" y="535" fill="#fde68a" font-size="12" font-family="monospace">UnifiedTrafficEmissionAgent</text>
+    <text x="40" y="556" fill="#cbd5e1" font-size="12">• Frame-by-frame CV vehicle tracking</text>
+    <text x="40" y="575" fill="#cbd5e1" font-size="12">• compute_empirical_emissions()</text>
+    <text x="40" y="594" fill="#cbd5e1" font-size="12">• push_report_to_webapp()</text>
+    <text x="40" y="614" fill="#94a3b8" font-size="12">  urllib POST w/ enriched vehicle tracks</text>
+  </g>
+
+  <!-- COLUMN 2 -->
+  <g>
+    <rect x="330" y="68" width="245" height="105" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1.5" />
+    <text x="346" y="92" fill="#94a3b8" font-size="12" font-weight="700">INITIAL HYDRATION (HTTP GET)</text>
+    <rect x="346" y="102" width="212" height="26" rx="5" fill="#1e293b" />
+    <text x="356" y="119" fill="#38bdf8" font-size="12" font-family="monospace">GET /api/bootstrap</text>
+    <rect x="346" y="135" width="212" height="26" rx="5" fill="#1e293b" />
+    <text x="356" y="152" fill="#38bdf8" font-size="12" font-family="monospace">GET /api/reports?cameraId=..</text>
+  </g>
+
+  <g>
+    <rect x="330" y="215" width="245" height="190" rx="10" fill="url(#amberBox)" stroke="#fbbf24" stroke-width="2" />
+    <text x="346" y="240" fill="#fbbf24" font-size="12" font-weight="700">LIVE AGENT CALL (HTTP POST)</text>
+    <rect x="346" y="250" width="212" height="28" rx="5" fill="#451a03" stroke="#f59e0b" />
+    <text x="354" y="268" fill="#fde68a" font-size="12" font-family="monospace" font-weight="700">POST /api/agent/analyze</text>
+    <text x="346" y="296" fill="#e2e8f0" font-size="12" font-weight="600">JSON Request Payload:</text>
+    <text x="346" y="315" fill="#cbd5e1" font-size="12" font-family="monospace">• cameraId, triggerSource</text>
+    <text x="346" y="333" fill="#cbd5e1" font-size="12" font-family="monospace">• eps, minPts, speedThreshold</text>
+    <text x="346" y="351" fill="#cbd5e1" font-size="12" font-family="monospace">• crossings {NB, SB, total}</text>
+    <text x="346" y="369" fill="#cbd5e1" font-size="12" font-family="monospace">• vehicles[] + emissions{}</text>
+    <text x="346" y="387" fill="#cbd5e1" font-size="12" font-family="monospace">• clusters[] (optional)</text>
+  </g>
+
+  <g>
+    <rect x="330" y="435" width="245" height="125" rx="10" fill="url(#emeraldBox)" stroke="#10b981" stroke-width="2" />
+    <text x="346" y="460" fill="#34d399" font-size="12" font-weight="700">PERSISTENT PUSH STREAM (SSE)</text>
+    <rect x="346" y="470" width="212" height="28" rx="5" fill="#064e3b" stroke="#10b981" />
+    <text x="354" y="488" fill="#a7f3d0" font-size="12" font-family="monospace" font-weight="700">GET /api/stream/events</text>
+    <text x="346" y="516" fill="#d1fae5" font-size="12" font-family="monospace">event: connected</text>
+    <text x="346" y="535" fill="#6ee7b7" font-size="12" font-family="monospace" font-weight="700">event: new_report (JSON)</text>
+    <text x="346" y="551" fill="#94a3b8" font-size="12">Broadcasts to all sseClients Set</text>
+  </g>
+
+  <g>
+    <rect x="330" y="585" width="245" height="95" rx="10" fill="url(#roseBox)" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5 3" />
+    <text x="346" y="608" fill="#fda4af" font-size="12" font-weight="700">OFFLINE / EDGE FALLBACK</text>
+    <text x="346" y="628" fill="#fecdd3" font-size="12" font-family="monospace">buildClientSideAgentReport()</text>
+    <text x="346" y="648" fill="#cbd5e1" font-size="12">Synthesizes report locally in browser</text>
+    <text x="346" y="665" fill="#94a3b8" font-size="12">when Express server is unreachable</text>
+  </g>
+
+  <!-- COLUMN 3 -->
+  <g>
+    <rect x="615" y="68" width="275" height="612" rx="12" fill="#0b1528" stroke="#10b981" stroke-width="2" />
+    <rect x="631" y="84" width="115" height="22" rx="4" fill="#10b981" fill-opacity="0.2" />
+    <text x="642" y="99" fill="#34d399" font-size="12" font-family="monospace" font-weight="700">server.js :3080</text>
+    <text x="631" y="125" fill="#f8fafc" font-size="15" font-weight="700">Autonomous Analytics Agent</text>
+    <text x="631" y="143" fill="#94a3b8" font-size="12" font-family="monospace">generateAgentReport(payload)</text>
+
+    <rect x="631" y="160" width="243" height="115" rx="8" fill="url(#cyanBox)" stroke="#0ea5e9" stroke-width="1.2" />
+    <text x="643" y="182" fill="#38bdf8" font-size="12" font-weight="700">3.1 Empirical Emission Engine</text>
+    <text x="643" y="200" fill="#e2e8f0" font-size="12" font-family="monospace">computeVehicleEmissionRates()</text>
+    <text x="643" y="219" fill="#cbd5e1" font-size="12">• U-shaped speed congestion penalty</text>
+    <text x="643" y="236" fill="#cbd5e1" font-size="12">• Weight, Fuel, Age, Engine CC mods</text>
+    <text x="643" y="253" fill="#38bdf8" font-size="12" font-family="monospace">→ CO2, NOx, PM2.5, CO &amp; AQI</text>
+
+    <rect x="631" y="290" width="243" height="130" rx="8" fill="url(#amberBox)" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="643" y="312" fill="#fbbf24" font-size="12" font-weight="700">3.2 Multi-Density Clustering</text>
+    <text x="643" y="330" fill="#fde68a" font-size="12" font-family="monospace">runMultiDensityStreamClustering</text>
+    <text x="643" y="349" fill="#cbd5e1" font-size="12">• Filters slow/high-CO2 candidates</text>
+    <text x="643" y="366" fill="#cbd5e1" font-size="12">• k-NN core distance &amp; mutual</text>
+    <text x="643" y="383" fill="#cbd5e1" font-size="12">  reachability (No pre-specified k)</text>
+    <text x="643" y="402" fill="#fbbf24" font-size="12" font-family="monospace">→ Hotspots PH-xxx + Severity</text>
+
+    <rect x="631" y="435" width="243" height="115" rx="8" fill="url(#emeraldBox)" stroke="#10b981" stroke-width="1.2" />
+    <text x="643" y="457" fill="#34d399" font-size="12" font-weight="700">3.3 LoS &amp; Policy Synthesizer</text>
+    <text x="643" y="475" fill="#a7f3d0" font-size="12" font-family="monospace">computeLevelOfService()</text>
+    <text x="643" y="494" fill="#cbd5e1" font-size="12">• HCM LoS Grade (A–F) &amp; Index</text>
+    <text x="643" y="511" fill="#cbd5e1" font-size="12">• Eco-VSL speed harmonization</text>
+    <text x="643" y="528" fill="#cbd5e1" font-size="12">• Freight low-emission rerouting</text>
+
+    <rect x="631" y="565" width="243" height="98" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.2" />
+    <text x="643" y="587" fill="#f8fafc" font-size="12" font-weight="700">3.4 State Store &amp; SSE Fan-Out</text>
+    <text x="643" y="606" fill="#cbd5e1" font-size="12" font-family="monospace">reportsStore.unshift(report)</text>
+    <text x="643" y="625" fill="#34d399" font-size="12" font-family="monospace">broadcastAgentEvent('new_report')</text>
+    <text x="643" y="644" fill="#94a3b8" font-size="12">Capped ring buffer (latest 50)</text>
+  </g>
+
+  <!-- COLUMN 4 -->
+  <g>
+    <rect x="925" y="68" width="250" height="215" rx="10" fill="url(#cyanBox)" stroke="#38bdf8" stroke-width="1.8" />
+    <rect x="941" y="82" width="135" height="20" rx="4" fill="#38bdf8" fill-opacity="0.2" />
+    <text x="949" y="96" fill="#38bdf8" font-size="12" font-family="monospace" font-weight="700">public/index.html</text>
+    <text x="941" y="120" fill="#f8fafc" font-size="14" font-weight="700">SmartCity HUD Dashboard</text>
+    <text x="941" y="142" fill="#cbd5e1" font-size="12">• 60 FPS Canvas Bounding Boxes</text>
+    <text x="941" y="160" fill="#cbd5e1" font-size="12">• Pulsing HDBSCAN Hotspot Hulls</text>
+    <text x="941" y="178" fill="#cbd5e1" font-size="12">• 60s Sliding Speed/CO2/NOx Chart</text>
+    <text x="941" y="198" fill="#34d399" font-size="12" font-family="monospace">• connectAgentSSE() Listener</text>
+    <text x="941" y="216" fill="#cbd5e1" font-size="12">• Live Pushed Reports Feed Column</text>
+    <text x="941" y="234" fill="#94a3b8" font-size="12">  Auto-flashes new RPT cards</text>
+  </g>
+
+  <g>
+    <rect x="925" y="315" width="250" height="205" rx="10" fill="url(#purpleBox)" stroke="#a855f7" stroke-width="1.8" />
+    <rect x="941" y="329" width="185" height="20" rx="4" fill="#a855f7" fill-opacity="0.2" />
+    <text x="949" y="343" fill="#d8b4fe" font-size="12" font-family="monospace" font-weight="700">map.html + public/map.js</text>
+    <text x="941" y="368" fill="#f8fafc" font-size="14" font-weight="700">Interactive GIS Map Window</text>
+    <text x="941" y="390" fill="#e9d5ff" font-size="12" font-family="monospace">BroadcastChannel('smartcity_..')</text>
+    <text x="941" y="412" fill="#cbd5e1" font-size="12">• LIVE_TELEMETRY_SYNC (10 Hz)</text>
+    <text x="941" y="432" fill="#cbd5e1" font-size="12">• NEW_AGENT_REPORT Sync</text>
+    <text x="941" y="452" fill="#cbd5e1" font-size="12">• SELECT_CAMERA (Bidirectional)</text>
+    <text x="941" y="472" fill="#cbd5e1" font-size="12">• Leaflet / Corridor AQI Pins</text>
+    <text x="941" y="492" fill="#94a3b8" font-size="12">  Real-time plume &amp; LoS overlays</text>
+  </g>
+
+  <g>
+    <rect x="925" y="550" width="250" height="130" rx="10" fill="#0f172a" stroke="#64748b" stroke-width="1.5" />
+    <text x="941" y="576" fill="#f8fafc" font-size="14" font-weight="700">Report Inspector Modal</text>
+    <text x="941" y="598" fill="#cbd5e1" font-size="12">• Executive Traffic &amp; Speed KPIs</text>
+    <text x="941" y="616" fill="#cbd5e1" font-size="12">• COPERT-VSP &amp; Hotspot Tables</text>
+    <text x="941" y="636" fill="#38bdf8" font-size="12" font-family="monospace">• Export: .JSON | .CSV | Print/PDF</text>
+    <text x="941" y="656" fill="#94a3b8" font-size="12">• Eco-VSL &amp; Signal Action Plan</text>
+  </g>
+
+  <!-- ARROWS -->
+  <path d="M 156 186 L 156 215" stroke="#00e5ff" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrowCyan)" fill="none" />
+  <path d="M 289 245 C 310 245, 305 120, 330 120" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="6 6" marker-end="url(#arrowCyan)" fill="none" />
+  <path d="M 289 310 L 330 310" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrowAmber)" fill="none" />
+  <path d="M 289 545 C 315 545, 305 345, 330 345" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrowAmber)" fill="none" />
+  <path d="M 575 120 L 615 120" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="6 6" marker-end="url(#arrowCyan)" fill="none" />
+  <path d="M 575 310 L 615 310" stroke="#fbbf24" stroke-width="2.8" stroke-dasharray="6 6" marker-end="url(#arrowAmber)" fill="none" />
+  <path d="M 752 275 L 752 290" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowCyan)" fill="none" />
+  <path d="M 752 420 L 752 435" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrowAmber)" fill="none" />
+  <path d="M 752 550 L 752 565" stroke="#10b981" stroke-width="2" marker-end="url(#arrowEmerald)" fill="none" />
+  <path d="M 615 615 C 590 615, 595 495, 575 495" stroke="#10b981" stroke-width="2.6" stroke-dasharray="6 6" marker-end="url(#arrowEmerald)" fill="none" />
+  <path d="M 575 475 C 600 475, 895 195, 925 195" stroke="#10b981" stroke-width="2.6" stroke-dasharray="6 6" marker-end="url(#arrowEmerald)" fill="none" />
+  <path d="M 289 395 C 312 395, 305 630, 330 630" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4 4" marker-end="url(#arrowRose)" fill="none" />
+  <path d="M 575 630 C 750 705, 880 460, 925 435" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4 4" marker-end="url(#arrowRose)" fill="none" />
+  <path d="M 1050 283 L 1050 315" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrowPurple)" marker-start="url(#arrowPurple)" fill="none" />
+  <path d="M 980 283 C 905 380, 905 520, 925 585" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="6 6" marker-end="url(#arrowCyan)" fill="none" />
+
+  <!-- Bottom Legend Bar -->
+  <rect x="24" y="692" width="1151" height="26" rx="6" fill="#0f172a" stroke="#1e293b" />
+  <circle cx="45" cy="705" r="5" fill="#fbbf24" />
+  <text x="56" y="709" fill="#cbd5e1" font-size="12">HTTP POST Telemetry / Agent Trigger</text>
+
+  <circle cx="295" cy="705" r="5" fill="#10b981" />
+  <text x="306" y="709" fill="#cbd5e1" font-size="12">Server-Sent Events (SSE) Real-Time Push</text>
+
+  <circle cx="575" cy="705" r="5" fill="#a855f7" />
+  <text x="586" y="709" fill="#cbd5e1" font-size="12">BroadcastChannel 10Hz Multi-Window GIS Sync</text>
+
+  <circle cx="885" cy="705" r="5" fill="#f43f5e" />
+  <text x="896" y="709" fill="#cbd5e1" font-size="12">Client-Side Edge Fallback Mode</text>
+</svg>
