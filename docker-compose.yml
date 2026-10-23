@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  smartcity-analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: smartcity-pulse:latest
+    container_name: smartcity_pulse_prod
+    restart: unless-stopped
+    ports:
+      - "3080:3080"
+    environment:
+      - NODE_ENV=production
+      - PORT=3080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3080/api/bootstrap"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

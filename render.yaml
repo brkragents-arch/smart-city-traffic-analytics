@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: smartcity-pulse-analytics
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/bootstrap
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3080
